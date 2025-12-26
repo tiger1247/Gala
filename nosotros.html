@@ -342,11 +342,11 @@
         /* Hero Section - Nosotros */
         .nosotros-hero {
             position: relative;
-            min-height: 85vh;
+            min-height: 70vh;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             background-image: url('images/nosotros-bg.png');
-            background-size: 100% 100%;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             overflow: hidden;
@@ -358,7 +358,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0);
         }
 
         .nosotros-hero-content {
@@ -385,20 +385,19 @@
         }
 
         .nosotros-hero-title {
-            font-size: 6rem;
+            font-size: 5rem;
             font-weight: bold;
             color: #fff;
-            line-height: 1;
+            line-height: 1.2;
             margin-bottom: 0;
-            text-transform: uppercase;
         }
 
         .nosotros-hero-subtitle {
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: bold;
             color: #28A745;
-            line-height: 1;
-            margin-top: -1rem;
+            line-height: 1.2;
+            margin-top: -0.5rem;
             text-transform: uppercase;
         }
 
@@ -438,8 +437,9 @@
 
         .pilares-subtitle {
             font-size: 0.9rem;
-            color: #666;
+            /* color: #666; */
             margin-bottom: 0.5rem;
+            font-weight: bold;  
         }
 
         .pilares-title {
@@ -588,12 +588,11 @@
             }
 
             .nosotros-hero {
-                min-height: auto;
+                min-height: 35vh;
                 align-items: center;
                 background-image: none;
-                background-color: #283550;
-                background-size: cover;
-                padding: 3rem 0;
+                background-color: #2C3E5B;
+                padding: 1.5rem 0;
             }
 
             .nosotros-hero-overlay {
@@ -601,22 +600,40 @@
             }
 
             .nosotros-hero-content {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1.5rem;
+                text-align: left;
+            }
+
+            .nosotros-hero-label {
+                text-align: left;
             }
 
             .nosotros-hero-title {
                 font-size: 2.5rem;
-            }
-
-            .nosotros-whatsapp-btn {
-                display: inline-block;
-                width: 100%;
-                max-width: 100%;
+                text-align: left;
             }
 
             .nosotros-hero-subtitle {
                 font-size: 2rem;
                 margin-top: -0.5rem;
+                text-align: left;
+            }
+
+            .nosotros-whatsapp-btn {
+                display: inline-block;
+                background: #25D366;
+                color: #fff;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+                transition: background 0.3s;
+            }
+
+            .nosotros-whatsapp-btn:hover {
+                background: #20BA5A;
             }
 
             .nosotros-hero-label {

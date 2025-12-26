@@ -345,9 +345,8 @@
             min-height: 70vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            background-image: url('images/Nuestros-Proyectos-bg.png');
-            background-size: cover;
+            background-image: url('images/Nuestros-Proyectos-bg.jpg');
+            background-size: 100%;
             background-position: center;
             background-repeat: no-repeat;
         }
@@ -358,24 +357,35 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(40, 53, 80, 0.6);
+            background: rgba(40, 53, 80, 0);
         }
 
         .proyectos-hero-content {
             position: relative;
             z-index: 1;
-            text-align: center;
             max-width: 1400px;
-            margin: 0 auto;
+            /* margin: 0 auto; */
+            /* margin-left: 4rem; */
             padding: 4rem 2rem;
             width: 100%;
         }
 
+        .proyectos-hero-subtitle {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
         .proyectos-hero-title {
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: bold;
             color: #fff;
             line-height: 1.2;
+        }
+
+        .proyectos-hero-whatsapp-btn {
+            display: none;
         }
 
         /* Intro Section */
@@ -572,13 +582,14 @@
         }
 
         .project-toggle-btn::after {
-            content: '▼';
-            font-size: 1rem;
+            content: '›';
+            font-size: 2.2rem;
+            transform: rotate(90deg);
             transition: transform 0.3s ease;
         }
 
         .project-item.expanded .project-toggle-btn::after {
-            content: '▲';
+            transform: rotate(-90deg);
         }
 
         .project-item.two-images .project-toggle-btn {
@@ -644,11 +655,20 @@
         .project-images-carousel-wrapper {
             overflow: hidden;
             border-radius: 10px;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+
+        .project-images-carousel-wrapper:active {
+            cursor: grabbing;
         }
 
         .project-images-carousel-track {
             display: flex;
             transition: transform 0.5s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
         }
 
         .project-images-carousel-slide {
@@ -805,11 +825,41 @@
             }
 
             .proyectos-hero {
-                min-height: 50vh;
+                min-height: 35vh;
+                background-image: none;
+                background-color: #2C3E5B;
+            }
+
+            .proyectos-hero-content {
+                /* padding: 1.5rem 1.5rem; */
+                text-align: left;
+            }
+
+            .proyectos-hero-subtitle {
+                font-size: 0.95rem;
+                text-align: left;
             }
 
             .proyectos-hero-title {
                 font-size: 2.5rem;
+                text-align: left;
+            }
+
+            .proyectos-hero-whatsapp-btn {
+                display: inline-block;
+                background: #25D366;
+                color: #fff;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+                transition: background 0.3s;
+            }
+
+            .proyectos-hero-whatsapp-btn:hover {
+                background: #20BA5A;
             }
 
             .proyectos-intro {
@@ -865,7 +915,7 @@
             .intro-project-carousel {
                 display: block;
                 order: 2;
-                margin-bottom: 0;
+                margin-bottom: 1.5rem;
             }
 
             .intro-project-carousel .project-images-carousel-slide {
@@ -893,8 +943,8 @@
             }
 
             .intro-project-info h3 {
-                font-size: 1.1rem;
-                margin-bottom: 0.25rem;
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
             }
 
             .intro-project-info p {
@@ -1003,7 +1053,9 @@
     <section class="proyectos-hero">
         <div class="proyectos-hero-overlay"></div>
         <div class="proyectos-hero-content">
+            <!-- <p class="proyectos-hero-subtitle">Innovación y excelencia en cada proyecto</p> -->
             <h1 class="proyectos-hero-title">Nuestros Proyectos</h1>
+            <a href="https://wa.me/595212290828" class="proyectos-hero-whatsapp-btn">Contactanos en WhatsApp</a>
         </div>
     </section>
 
@@ -1303,11 +1355,15 @@
             
             projectCarousels.forEach(carousel => {
                 const track = carousel.querySelector('.project-images-carousel-track');
+                const wrapper = carousel.querySelector('.project-images-carousel-wrapper');
                 const dots = carousel.querySelectorAll('.project-pagination-dot');
                 const pagination = carousel.querySelector('.project-images-pagination');
                 const slides = carousel.querySelectorAll('.project-images-carousel-slide');
                 let currentSlide = 0;
                 let carouselInterval;
+                let startX = 0;
+                let currentX = 0;
+                let isDragging = false;
 
                 // Hide pagination if only one slide
                 if (slides.length <= 1 && pagination) {
@@ -1328,22 +1384,154 @@
                     });
                 }
 
+                function goToSlide(index) {
+                    if (index >= 0 && index < slides.length) {
+                        currentSlide = index;
+                        updateProjectCarousel();
+                        stopProjectCarousel();
+                        startProjectCarousel();
+                    }
+                }
+
                 // Dot click handlers
                 dots.forEach((dot, index) => {
                     dot.addEventListener('click', function() {
-                        currentSlide = index;
-                        updateProjectCarousel();
-                        // Reset auto-play
-                        clearInterval(carouselInterval);
-                        startProjectCarousel();
+                        goToSlide(index);
                     });
                 });
 
-                function startProjectCarousel() {
-                    if (window.innerWidth <= 768 && slides.length > 1) {
-                        carouselInterval = setInterval(() => {
-                            currentSlide = (currentSlide + 1) % slides.length;
+                // Touch/Swipe support
+                if (wrapper) {
+                    let touchStartX = 0;
+                    let touchStartY = 0;
+                    let isSwipe = false;
+
+                    wrapper.addEventListener('touchstart', function(e) {
+                        touchStartX = e.touches[0].clientX;
+                        touchStartY = e.touches[0].clientY;
+                        startX = touchStartX;
+                        isDragging = true;
+                        isSwipe = false;
+                        stopProjectCarousel();
+                        if (track) {
+                            track.style.transition = 'none';
+                        }
+                    }, { passive: true });
+
+                    wrapper.addEventListener('touchmove', function(e) {
+                        if (!isDragging) return;
+                        
+                        currentX = e.touches[0].clientX;
+                        const currentY = e.touches[0].clientY;
+                        const diffX = touchStartX - currentX;
+                        const diffY = touchStartY - currentY;
+
+                        // Determine if this is a horizontal swipe
+                        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+                            isSwipe = true;
+                            e.preventDefault();
+                        }
+
+                        if (isSwipe && track) {
+                            const offset = -currentSlide * 100 + (diffX / wrapper.offsetWidth) * 100;
+                            // Limit the offset to prevent over-scrolling
+                            const minOffset = -((slides.length - 1) * 100);
+                            const maxOffset = 0;
+                            const clampedOffset = Math.max(minOffset, Math.min(maxOffset, offset));
+                            track.style.transform = `translateX(${clampedOffset}%)`;
+                        }
+                    }, { passive: false });
+
+                    wrapper.addEventListener('touchend', function(e) {
+                        if (!isDragging) return;
+                        isDragging = false;
+                        
+                        if (track) {
+                            track.style.transition = 'transform 0.5s ease';
+                        }
+                        
+                        const diffX = startX - currentX;
+                        const threshold = wrapper.offsetWidth * 0.25; // 25% threshold
+
+                        if (isSwipe && Math.abs(diffX) > threshold) {
+                            if (diffX > 0 && currentSlide < slides.length - 1) {
+                                goToSlide(currentSlide + 1);
+                            } else if (diffX < 0 && currentSlide > 0) {
+                                goToSlide(currentSlide - 1);
+                            } else {
+                                updateProjectCarousel();
+                            }
+                        } else {
                             updateProjectCarousel();
+                        }
+                        
+                        isSwipe = false;
+                    }, { passive: true });
+
+                    // Mouse drag support for desktop testing
+                    wrapper.addEventListener('mousedown', function(e) {
+                        startX = e.clientX;
+                        isDragging = true;
+                        stopProjectCarousel();
+                        if (track) {
+                            track.style.transition = 'none';
+                        }
+                        e.preventDefault();
+                    });
+
+                    wrapper.addEventListener('mousemove', function(e) {
+                        if (!isDragging) return;
+                        currentX = e.clientX;
+                        const diffX = startX - currentX;
+                        const offset = -currentSlide * 100 + (diffX / wrapper.offsetWidth) * 100;
+                        const minOffset = -((slides.length - 1) * 100);
+                        const maxOffset = 0;
+                        const clampedOffset = Math.max(minOffset, Math.min(maxOffset, offset));
+                        if (track) {
+                            track.style.transform = `translateX(${clampedOffset}%)`;
+                        }
+                    });
+
+                    wrapper.addEventListener('mouseup', function(e) {
+                        if (!isDragging) return;
+                        isDragging = false;
+                        if (track) {
+                            track.style.transition = 'transform 0.5s ease';
+                        }
+                        const diffX = startX - currentX;
+                        const threshold = wrapper.offsetWidth * 0.25;
+
+                        if (Math.abs(diffX) > threshold) {
+                            if (diffX > 0 && currentSlide < slides.length - 1) {
+                                goToSlide(currentSlide + 1);
+                            } else if (diffX < 0 && currentSlide > 0) {
+                                goToSlide(currentSlide - 1);
+                            } else {
+                                updateProjectCarousel();
+                            }
+                        } else {
+                            updateProjectCarousel();
+                        }
+                    });
+
+                    wrapper.addEventListener('mouseleave', function() {
+                        if (isDragging) {
+                            isDragging = false;
+                            if (track) {
+                                track.style.transition = 'transform 0.5s ease';
+                            }
+                            updateProjectCarousel();
+                        }
+                    });
+                }
+
+                function startProjectCarousel() {
+                    if (window.innerWidth <= 768 && slides.length > 1 && !isDragging) {
+                        carouselInterval = setInterval(() => {
+                            if (!isDragging) {
+                                currentSlide = (currentSlide + 1) % slides.length;
+                                updateProjectCarousel();
+                            }
                         }, 4000); // 4 seconds per slide
                     }
                 }
@@ -1351,6 +1539,7 @@
                 function stopProjectCarousel() {
                     if (carouselInterval) {
                         clearInterval(carouselInterval);
+                        carouselInterval = null;
                     }
                 }
 

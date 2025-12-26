@@ -346,9 +346,8 @@
             min-height: 70vh;
             display: flex;
             align-items: center;
-            justify-content: center;
             background-image: url('images/Contacto-bg.png');
-            background-size: cover;
+            background-size: 100%;
             background-position: center;
             background-repeat: no-repeat;
         }
@@ -359,13 +358,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(40, 53, 80, 0.6);
+            background: rgba(40, 53, 80, 0);
         }
 
         .contacto-hero-content {
             position: relative;
             z-index: 1;
-            text-align: center;
             max-width: 1400px;
             margin: 0 auto;
             padding: 4rem 2rem;
@@ -380,7 +378,7 @@
         }
 
         .contacto-hero-title {
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: bold;
             color: #fff;
             line-height: 1.2;
@@ -399,10 +397,17 @@
         .contact-info-container {
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .contact-info-header {
+            margin-bottom: 3rem;
+        }
+
+        .contact-info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: start;
+            align-items: stretch;
         }
 
         .contact-info-content {
@@ -413,8 +418,9 @@
 
         .contact-info-subtitle {
             font-size: 0.9rem;
-            color: #666;
+            /* color: #666; */
             margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .contact-info-title {
@@ -446,7 +452,11 @@
         }
 
         .contact-item-icon {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            margin-right: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .contact-item-label {
@@ -495,7 +505,8 @@
         /* Map Section */
         .contact-map {
             width: 100%;
-            height: 500px;
+            height: 100%;
+            min-height: 500px;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -539,8 +550,9 @@
 
         .contact-form-subtitle {
             font-size: 0.9rem;
-            color: #666;
+            /* color: #666; */
             margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .contact-form-title {
@@ -614,8 +626,9 @@
         }
 
         .form-submit-btn::after {
-            content: ' →';
+            content: ' ›';
             margin-left: 0.5rem;
+            font-size: 2.5rem;
         }
 
         /* Custom Contacto Footer */
@@ -780,10 +793,10 @@
             }
 
             .contacto-hero {
-                min-height: auto;
+                min-height: 35vh;
                 background-image: none;
-                background-color: #283550;
-                padding: 2rem 0;
+                background-color: #2C3E5B;
+                padding: 1.5rem 0;
             }
 
             .contacto-hero-overlay {
@@ -791,34 +804,49 @@
             }
 
             .contacto-hero-content {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1.5rem;
+                text-align: left;
             }
 
             .contacto-hero-subtitle {
                 font-size: 0.95rem;
+                text-align: left;
             }
 
             .contacto-hero-title {
                 font-size: 2rem;
                 margin-bottom: 1.5rem;
+                text-align: left;
             }
 
             .contacto-hero-whatsapp-btn {
                 display: inline-block;
-                background: #28A745;
+                background: #25D366;
                 color: #fff;
-                padding: 0.9rem 1.5rem;
-                border-radius: 5px;
+                padding: 1rem 2rem;
+                border-radius: 8px;
                 text-decoration: none;
                 font-size: 1rem;
-                font-weight: 500;
-                width: 100%;
-                text-align: center;
-                margin-top: 1rem;
+                font-weight: 600;
+                margin-top: 1.5rem;
+                transition: background 0.3s;
+            }
+
+            .contacto-hero-whatsapp-btn:hover {
+                background: #20BA5A;
             }
 
             .contact-info-section {
                 padding: 3rem 1.5rem;
+            }
+
+            .contact-info-header {
+                margin-bottom: 2rem;
+            }
+
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .contact-info-title {
@@ -831,6 +859,7 @@
 
             .contact-map {
                 height: 300px;
+                min-height: 300px;
             }
 
             .contact-form-section {
@@ -938,47 +967,49 @@
     <!-- Contact Info Section -->
     <section class="contact-info-section">
         <div class="contact-info-container">
-            <div class="contact-info-content">
-                <div>
-                    <div class="contact-info-subtitle">Contacto</div>
-                    <h2 class="contact-info-title">Ponte en contacto</h2>
-                    <p class="contact-info-description">Nuestro equipo está disponible para resolver tus dudas</p>
-                </div>
-
-                <!-- Email -->
-                <div class="contact-item">
-                    <div class="contact-item-header">
-                        <span class="contact-item-icon">✉</span>
-                        <span class="contact-item-label">Correo</span>
-                    </div>
-                    <p class="contact-item-description">Escribinos directamente</p>
-                    <a href="mailto:info@metalpack.com.py" class="contact-item-value">info@metalpack.com.py</a>
-                </div>
-
-                <!-- Phone -->
-                <div class="contact-item">
-                    <div class="contact-item-header">
-                        <span class="contact-item-icon">📞</span>
-                        <span class="contact-item-label">Teléfono</span>
-                    </div>
-                    <p class="contact-item-description">Llamanos o escribinos en WhatsApp</p>
-                    <a href="tel:+595213299828" class="contact-item-value underlined">+595 (21) 329 9828</a>
-                </div>
-
-                <!-- Office -->
-                <div class="contact-item">
-                    <div class="contact-item-header">
-                        <span class="contact-item-icon">📍</span>
-                        <span class="contact-item-label">Oficina</span>
-                    </div>
-                    <p class="contact-item-description">Arsenio Erico c/ Maria Auxiliadora. Ñemby, Paraguay</p>
-                    <a href="#" class="contact-item-link">Ver ubicación</a>
-                </div>
+            <div class="contact-info-header">
+                <div class="contact-info-subtitle">Contacto</div>
+                <h2 class="contact-info-title">Ponte en contacto</h2>
+                <p class="contact-info-description">Nuestro equipo está disponible para resolver tus dudas</p>
             </div>
+            
+            <div class="contact-info-grid">
+                <div class="contact-info-content">
+                    <!-- Email -->
+                    <div class="contact-item">
+                        <div class="contact-item-header">
+                            <span class="contact-item-icon">✉</span>
+                            <span class="contact-item-label">Correo</span>
+                        </div>
+                        <p class="contact-item-description">Escribinos directamente</p>
+                        <a href="mailto:info@metalpack.com.py" class="contact-item-value">info@metalpack.com.py</a>
+                    </div>
 
-            <!-- Map -->
-            <div class="contact-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.4100917348724!2d-57.548556365525194!3d-25.381710835184784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5bd1df7e8d1%3A0x0!2zLTI1LjM4MTcxMDgsIC01Ny41NDg1NTYz!5e0!3m2!1ses!2spy!4v1718129060000!5m2!1ses!2spy" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- Phone -->
+                    <div class="contact-item">
+                        <div class="contact-item-header">
+                            <span class="contact-item-icon">🕻</span>
+                            <span class="contact-item-label">Teléfono</span>
+                        </div>
+                        <p class="contact-item-description">Llamanos o escribinos en WhatsApp</p>
+                        <a href="tel:+595213299828" class="contact-item-value underlined">+595 (21) 329 9828</a>
+                    </div>
+
+                    <!-- Office -->
+                    <div class="contact-item">
+                        <div class="contact-item-header">
+                            <span class="contact-item-icon">⚲</span>
+                            <span class="contact-item-label">Oficina</span>
+                        </div>
+                        <p class="contact-item-description">Arsenio Erico c/ Maria Auxiliadora. Ñemby, Paraguay</p>
+                        <a href="#" class="contact-item-link">Ver ubicación</a>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.4100917348724!2d-57.548556365525194!3d-25.381710835184784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5bd1df7e8d1%3A0x0!2zLTI1LjM4MTcxMDgsIC01Ny41NDg1NTYz!5e0!3m2!1ses!2spy!4v1718129060000!5m2!1ses!2spy" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </section>
