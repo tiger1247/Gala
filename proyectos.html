@@ -415,83 +415,150 @@
 
         .intro-project {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1.4fr 1fr;
             gap: 0;
             background: #fff;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            /* min-height: 500px; */
+            min-height: 350px;
+            margin-bottom: 2rem;
         }
 
-        .intro-project.small {
-            /* min-height: 900px; */
-            max-height: 900px;
+        .intro-project:last-child {
+            margin-bottom: 0;
         }
 
         .intro-project-images {
-            display: contents;
+            display: none;
         }
 
-        .intro-image-main {
-            grid-column: 1;
-            grid-row: 1;
-            width: 100%;
-            height: 100%;
-            min-height: 250px;
-            object-fit: cover;
-        }
-
+        .intro-image-main,
         .intro-image-small {
-            width: 100%;
-            height: 100%;
-            min-height: 250px;
-            object-fit: cover;
-        }
-
-        .intro-project.small .intro-image-main,
-        .intro-project.small .intro-image-small {
-            min-height: 450px;
-            max-height: 450px;
-        }
-
-        .intro-image-small:first-of-type {
-            grid-column: 1;
-            grid-row: 2;
-        }
-
-        .intro-image-small:last-of-type {
-            grid-column: 2;
-            grid-row: 2;
+            display: none;
         }
 
         .intro-project-info {
-            grid-column: 2;
-            grid-row: 1;
-            padding: 2rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: #f8f8f8;
+            background: #f5f5f5;
         }
 
         .intro-project-info h3 {
-            font-size: 1.2rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #000;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .intro-project-info p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 0;
         }
 
-        /* Intro Project Carousel */
+        /* Intro Project Desktop Carousel */
+        .intro-project-carousel-desktop {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            max-height: 350px;
+            overflow: hidden;
+        }
+
+        .intro-project-carousel-desktop-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .intro-project-carousel-desktop-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .intro-project-carousel-desktop-slide {
+            min-width: 100%;
+            height: 350px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .intro-project-carousel-desktop-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Intro Project Navigation Arrows */
+        .intro-project-carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .intro-project-carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .intro-project-carousel-nav.prev {
+            left: 20px;
+        }
+
+        .intro-project-carousel-nav.next {
+            right: 20px;
+        }
+
+        .intro-project-carousel-nav::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-top: 3px solid #333;
+            border-right: 3px solid #333;
+            display: block;
+        }
+
+        .intro-project-carousel-nav.prev::before {
+            transform: rotate(-135deg);
+        }
+
+        .intro-project-carousel-nav.next::before {
+            transform: rotate(45deg);
+        }
+
+        .intro-project-carousel-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Intro Project Carousel - Mobile */
         .intro-project-carousel {
             display: none;
+        }
+
+        /* Desktop Carousel - show on desktop */
+        .intro-project-carousel-desktop {
+            display: block;
         }
 
         /* Projects Showcase */
@@ -507,140 +574,146 @@
 
         .project-item {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: 450px;
+            grid-template-columns: 1.4fr 1fr;
             gap: 0;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            transition: grid-template-rows 0.3s ease;
             overflow: hidden;
+            min-height: 350px;
         }
 
         .project-item:last-child {
             margin-bottom: 0;
         }
 
-        .project-item.expanded {
-            grid-template-rows: 450px 450px;
-        }
-
-        .project-item.two-images {
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 450px;
-            min-height: 450px;
-        }
-
         .project-info {
             background: #f5f5f5;
-            padding: 2rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             position: relative;
-            grid-column: 2;
-            grid-row: 1;
-        }
-
-        .project-item.two-images .project-info {
-            grid-column: 3;
-            grid-row: 1;
         }
 
         .project-info h3 {
-            font-size: 1.3rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #000;
             margin-bottom: 1rem;
         }
 
         .project-info p {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 0;
         }
 
-        .project-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #4A90E2;
-            background: none;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 0;
-            transition: opacity 0.3s;
-        }
-
-        .project-toggle-btn:hover {
-            opacity: 0.7;
-        }
-
-        .project-toggle-btn::after {
-            content: '›';
-            font-size: 2.2rem;
-            transform: rotate(90deg);
-            transition: transform 0.3s ease;
-        }
-
-        .project-item.expanded .project-toggle-btn::after {
-            transform: rotate(-90deg);
-        }
-
-        .project-item.two-images .project-toggle-btn {
-            display: none;
-        }
-
-        .project-image {
+        /* Desktop Carousel Container */
+        .project-carousel-desktop {
+            position: relative;
             width: 100%;
             height: 100%;
-            min-height: 450px;
+            min-height: 350px;
+            max-height: 350px;
+            overflow: hidden;
+        }
+
+        .project-carousel-desktop-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .project-carousel-desktop-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .project-carousel-desktop-slide {
+            min-width: 100%;
+            height: 350px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .project-carousel-desktop-slide img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        /* First image - always visible in first row, first column */
-        .project-image:nth-of-type(1) {
-            grid-column: 1;
-            grid-row: 1;
+        /* Navigation Arrows */
+        .project-carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* Second image - hidden by default, shown in second row, first column when expanded */
-        .project-image:nth-of-type(2) {
-            grid-column: 1;
-            grid-row: 2;
-            display: none;
+        .project-carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .project-item.expanded .project-image:nth-of-type(2) {
+        .project-carousel-nav.prev {
+            left: 20px;
+        }
+
+        .project-carousel-nav.next {
+            right: 20px;
+        }
+
+        .project-carousel-nav::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-top: 3px solid #333;
+            border-right: 3px solid #333;
             display: block;
         }
 
-        /* Third image - hidden by default, shown in second row, second column when expanded */
-        .project-image:nth-of-type(3) {
-            grid-column: 2;
-            grid-row: 2;
+        .project-carousel-nav.prev::before {
+            transform: rotate(-135deg);
+        }
+
+        .project-carousel-nav.next::before {
+            transform: rotate(45deg);
+        }
+
+        .project-carousel-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Hide old grid-based images on desktop */
+        .project-image {
             display: none;
         }
 
-        .project-item.expanded .project-image:nth-of-type(3) {
-            display: block;
+        .project-toggle-btn {
+            display: none;
         }
 
-        /* Two-images projects - both images visible in first row */
-        .project-item.two-images .project-image:nth-of-type(1) {
-            grid-column: 1;
-            grid-row: 1;
-        }
-
-        .project-item.two-images .project-image:nth-of-type(2) {
-            grid-column: 2;
-            grid-row: 1;
+        /* Desktop Carousel - show on desktop, hide on mobile */
+        .project-carousel-desktop {
             display: block;
         }
 
@@ -912,6 +985,12 @@
                 display: none;
             }
 
+            /* Hide desktop carousel on mobile */
+            .intro-project-carousel-desktop {
+                display: none !important;
+            }
+
+            /* Show mobile carousel on mobile */
             .intro-project-carousel {
                 display: block;
                 order: 2;
@@ -981,10 +1060,12 @@
                 margin-bottom: 0;
             }
 
-            .project-image {
+            /* Hide desktop carousel on mobile */
+            .project-carousel-desktop {
                 display: none !important;
             }
 
+            /* Show mobile carousel on mobile */
             .project-images-carousel {
                 display: block;
                 order: 2;
@@ -1066,14 +1147,27 @@
                 <p>Nuestros clientes eligen Metalpack por el compromiso inquebrantable con la excelencia y la responsabilidad industrial.</p>
             </div>
             <div class="intro-project">
-                <div class="intro-project-images">
-                    <img src="images/Sistema-de-recupero-de-agua-1.png" alt="Sistema de recupero de agua" class="intro-image-main">
-                    <img src="images/Sistema-de-recupero-de-agua-2.png" alt="Sistema de recupero de agua" class="intro-image-small">
-                    <img src="images/Sistema-de-recupero-de-agua-3.png" alt="Sistema de recupero de agua" class="intro-image-small">
-                </div>
                 <div class="intro-project-info">
                     <h3>Sistema de recupero de agua</h3>
                     <p>Instalación mecánica y eléctrica</p>
+                </div>
+                <!-- Desktop Carousel -->
+                <div class="intro-project-carousel-desktop">
+                    <div class="intro-project-carousel-desktop-wrapper">
+                        <div class="intro-project-carousel-desktop-track" data-project="recupero">
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Sistema-de-recupero-de-agua-1.png" alt="Sistema de recupero de agua">
+                            </div>
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Sistema-de-recupero-de-agua-2.png" alt="Sistema de recupero de agua">
+                            </div>
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Sistema-de-recupero-de-agua-3.png" alt="Sistema de recupero de agua">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="intro-project-carousel-nav prev" data-project="recupero">‹</button>
+                    <button class="intro-project-carousel-nav next" data-project="recupero">›</button>
                 </div>
                 <!-- Mobile Carousel -->
                 <div class="intro-project-carousel">
@@ -1099,15 +1193,27 @@
             </div>
 
             <!-- Second Project: Depósito de agroquímicos -->
-            <div class="intro-project small" style="margin-top: 2rem;">
-                <div class="intro-project-images">
-                    <img src="images/Depósito-de-agroquímicos-1.png" alt="Depósito de agroquímicos" class="intro-image-main">
-                    <img src="images/Depósito-de-agroquímicos-2.png" alt="Depósito de agroquímicos" class="intro-image-small">
-                    <img src="images/Depósito-de-agroquímicos-3.png" alt="Depósito de agroquímicos" class="intro-image-small">
-                </div>
+            <div class="intro-project" style="margin-top: 2rem;">
                 <div class="intro-project-info">
                     <h3>Depósito de agroquímicos</h3>
-                    <!-- <p>Instalación mecánica y eléctrica</p> -->
+                </div>
+                <!-- Desktop Carousel -->
+                <div class="intro-project-carousel-desktop">
+                    <div class="intro-project-carousel-desktop-wrapper">
+                        <div class="intro-project-carousel-desktop-track" data-project="deposito">
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Depósito-de-agroquímicos-1.png" alt="Depósito de agroquímicos">
+                            </div>
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Depósito-de-agroquímicos-2.png" alt="Depósito de agroquímicos">
+                            </div>
+                            <div class="intro-project-carousel-desktop-slide">
+                                <img src="images/Depósito-de-agroquímicos-3.png" alt="Depósito de agroquímicos">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="intro-project-carousel-nav prev" data-project="deposito">‹</button>
+                    <button class="intro-project-carousel-nav next" data-project="deposito">›</button>
                 </div>
                 <!-- Mobile Carousel -->
                 <div class="intro-project-carousel">
@@ -1137,16 +1243,30 @@
     <!-- Projects Showcase -->
     <section class="projects-showcase">
         <div class="projects-showcase-container">
-        <!-- Project 1: Pavimento (3 images = 2x2 grid, collapsible) -->
+        <!-- Project 1: Pavimento -->
         <div class="project-item">
-            <img src="images/Pavimento-de-hormigón-armado1.png" alt="Pavimento de hormigón armado" class="project-image">
             <div class="project-info">
                 <h3>Pavimento de hormigón armado</h3>
                 <p>Espesor de 15cm para tránsito pesado de camiones</p>
-                <button class="project-toggle-btn">Ver más imágenes</button>
             </div>
-            <img src="images/Pavimento-de-hormigón-armado2.png" alt="Pavimento de hormigón armado" class="project-image">
-            <img src="images/Pavimento-de-hormigón-armado3.png" alt="Pavimento de hormigón armado" class="project-image">
+            <!-- Desktop Carousel -->
+            <div class="project-carousel-desktop">
+                <div class="project-carousel-desktop-wrapper">
+                    <div class="project-carousel-desktop-track" data-project="pavimento">
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Pavimento-de-hormigón-armado1.png" alt="Pavimento de hormigón armado">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Pavimento-de-hormigón-armado2.png" alt="Pavimento de hormigón armado">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Pavimento-de-hormigón-armado3.png" alt="Pavimento de hormigón armado">
+                        </div>
+                    </div>
+                </div>
+                <button class="project-carousel-nav prev" data-project="pavimento">‹</button>
+                <button class="project-carousel-nav next" data-project="pavimento">›</button>
+            </div>
             
             <!-- Mobile Carousel -->
             <div class="project-images-carousel">
@@ -1171,13 +1291,26 @@
             </div>
         </div>
 
-        <!-- Project 2: Oficina KM 21 (2 images = 3 grid sections) -->
-        <div class="project-item two-images">
-            <img src="images/Oficina-KM-21-1.png" alt="Oficina KM 21" class="project-image">
-            <img src="images/Oficina-KM-21-2.png" alt="Oficina KM 21" class="project-image">
+        <!-- Project 2: Oficina KM 21 -->
+        <div class="project-item">
             <div class="project-info">
                 <h3>Oficina KM 21</h3>
                 <p>Edificio de oficinas con diseño moderno y funcional</p>
+            </div>
+            <!-- Desktop Carousel -->
+            <div class="project-carousel-desktop">
+                <div class="project-carousel-desktop-wrapper">
+                    <div class="project-carousel-desktop-track" data-project="oficina">
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Oficina-KM-21-1.png" alt="Oficina KM 21">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Oficina-KM-21-2.png" alt="Oficina KM 21">
+                        </div>
+                    </div>
+                </div>
+                <button class="project-carousel-nav prev" data-project="oficina">‹</button>
+                <button class="project-carousel-nav next" data-project="oficina">›</button>
             </div>
             
             <!-- Mobile Carousel -->
@@ -1199,16 +1332,30 @@
             </div>
         </div>
 
-        <!-- Project 3: Instalaciones mecánicas (3 images = 2x2 grid, collapsible) -->
+        <!-- Project 3: Instalaciones mecánicas -->
         <div class="project-item">
-            <img src="images/Instalaciones-mecánicas-CIP-TPH-1.png" alt="Instalaciones mecánicas CIP TPH" class="project-image">
             <div class="project-info">
                 <h3>Instalaciones mecánicas - CIP TPH</h3>
                 <p>Sistemas de instalaciones mecánicas para procesos industriales</p>
-                <button class="project-toggle-btn">Ver más imágenes</button>
             </div>
-            <img src="images/Instalaciones-mecánicas-CIP-TPH-2.png" alt="Instalaciones mecánicas CIP TPH" class="project-image">
-            <img src="images/Instalaciones-mecánicas-CIP-TPH-3.png" alt="Instalaciones mecánicas CIP TPH" class="project-image">
+            <!-- Desktop Carousel -->
+            <div class="project-carousel-desktop">
+                <div class="project-carousel-desktop-wrapper">
+                    <div class="project-carousel-desktop-track" data-project="instalaciones">
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Instalaciones-mecánicas-CIP-TPH-1.png" alt="Instalaciones mecánicas CIP TPH">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Instalaciones-mecánicas-CIP-TPH-2.png" alt="Instalaciones mecánicas CIP TPH">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Instalaciones-mecánicas-CIP-TPH-3.png" alt="Instalaciones mecánicas CIP TPH">
+                        </div>
+                    </div>
+                </div>
+                <button class="project-carousel-nav prev" data-project="instalaciones">‹</button>
+                <button class="project-carousel-nav next" data-project="instalaciones">›</button>
+            </div>
             
             <!-- Mobile Carousel -->
             <div class="project-images-carousel">
@@ -1233,13 +1380,26 @@
             </div>
         </div>
 
-        <!-- Project 4: Tratamiento de agua (2 images = 3 grid sections) -->
-        <div class="project-item two-images">
-            <img src="images/Obra-de-tratamiento-de-agua-1.png" alt="Obra de tratamiento de agua" class="project-image">
-            <img src="images/Obra-de-tratamiento-de-agua-2.png" alt="Obra de tratamiento de agua" class="project-image">
+        <!-- Project 4: Tratamiento de agua -->
+        <div class="project-item">
             <div class="project-info">
                 <h3>Obra de tratamiento de agua</h3>
                 <p>Instalación de sistemas de tratamiento de agua para uso industrial</p>
+            </div>
+            <!-- Desktop Carousel -->
+            <div class="project-carousel-desktop">
+                <div class="project-carousel-desktop-wrapper">
+                    <div class="project-carousel-desktop-track" data-project="tratamiento">
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Obra-de-tratamiento-de-agua-1.png" alt="Obra de tratamiento de agua">
+                        </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Obra-de-tratamiento-de-agua-2.png" alt="Obra de tratamiento de agua">
+                        </div>
+                    </div>
+                </div>
+                <button class="project-carousel-nav prev" data-project="tratamiento">‹</button>
+                <button class="project-carousel-nav next" data-project="tratamiento">›</button>
             </div>
             
             <!-- Mobile Carousel -->
@@ -1570,20 +1730,133 @@
         // Initialize project carousels
         initProjectCarousels();
 
-        // Project Toggle Functionality
-        function initProjectToggle() {
-            const toggleButtons = document.querySelectorAll('.project-toggle-btn');
+        // Desktop Carousel Navigation
+        function initDesktopCarousels() {
+            const carousels = document.querySelectorAll('.project-carousel-desktop-track');
             
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const projectItem = this.closest('.project-item');
-                    projectItem.classList.toggle('expanded');
-                });
+            carousels.forEach(track => {
+                const projectId = track.getAttribute('data-project');
+                const slides = track.querySelectorAll('.project-carousel-desktop-slide');
+                const prevBtn = document.querySelector(`.project-carousel-nav.prev[data-project="${projectId}"]`);
+                const nextBtn = document.querySelector(`.project-carousel-nav.next[data-project="${projectId}"]`);
+                let currentSlide = 0;
+                
+                if (slides.length <= 1) {
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                    return;
+                }
+                
+                function updateCarousel() {
+                    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    
+                    // Update button states
+                    if (prevBtn) {
+                        prevBtn.disabled = currentSlide === 0;
+                    }
+                    if (nextBtn) {
+                        nextBtn.disabled = currentSlide === slides.length - 1;
+                    }
+                }
+                
+                function goToSlide(index) {
+                    if (index >= 0 && index < slides.length) {
+                        currentSlide = index;
+                        updateCarousel();
+                    }
+                }
+                
+                function nextSlide() {
+                    if (currentSlide < slides.length - 1) {
+                        goToSlide(currentSlide + 1);
+                    }
+                }
+                
+                function prevSlide() {
+                    if (currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+                
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', prevSlide);
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', nextSlide);
+                }
+                
+                // Initialize
+                updateCarousel();
             });
         }
 
-        // Initialize project toggle
-        initProjectToggle();
+        // Initialize desktop carousels
+        initDesktopCarousels();
+
+        // Intro Project Desktop Carousel Navigation
+        function initIntroDesktopCarousels() {
+            const carousels = document.querySelectorAll('.intro-project-carousel-desktop-track');
+            
+            carousels.forEach(track => {
+                const projectId = track.getAttribute('data-project');
+                const slides = track.querySelectorAll('.intro-project-carousel-desktop-slide');
+                const prevBtn = document.querySelector(`.intro-project-carousel-nav.prev[data-project="${projectId}"]`);
+                const nextBtn = document.querySelector(`.intro-project-carousel-nav.next[data-project="${projectId}"]`);
+                let currentSlide = 0;
+                
+                if (slides.length <= 1) {
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                    return;
+                }
+                
+                function updateCarousel() {
+                    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    
+                    // Update button states
+                    if (prevBtn) {
+                        prevBtn.disabled = currentSlide === 0;
+                    }
+                    if (nextBtn) {
+                        nextBtn.disabled = currentSlide === slides.length - 1;
+                    }
+                }
+                
+                function goToSlide(index) {
+                    if (index >= 0 && index < slides.length) {
+                        currentSlide = index;
+                        updateCarousel();
+                    }
+                }
+                
+                function nextSlide() {
+                    if (currentSlide < slides.length - 1) {
+                        goToSlide(currentSlide + 1);
+                    }
+                }
+                
+                function prevSlide() {
+                    if (currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+                
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', prevSlide);
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', nextSlide);
+                }
+                
+                // Initialize
+                updateCarousel();
+            });
+        }
+
+        // Initialize intro desktop carousels
+        initIntroDesktopCarousels();
     </script>
 </body>
 </html>
