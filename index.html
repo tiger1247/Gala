@@ -1045,6 +1045,8 @@
 
             .services-subtitle {
                 font-size: 0.85rem;
+                text-align: left;
+                font-weight: bold;
             }
 
             .services-title {
@@ -1398,7 +1400,7 @@
 
         /* Projects Section */
         .projects-intro {
-            padding: 3rem 2rem;
+            /* padding: 3rem 2rem; */
             background: #f5f5f5;
         }
 
@@ -1746,6 +1748,32 @@
             /* Show mobile carousel on mobile */
             .project-images-carousel {
                 display: block;
+                padding: 0.5rem 1.5rem 0 1.5rem;
+            }
+
+            .project-images-carousel-wrapper {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .project-images-carousel-track {
+                margin: 0;
+            }
+
+            .project-images-carousel-slide {
+                padding: 0;
+                margin: 0;
+            }
+
+            .project-images-carousel-slide img {
+                padding: 0;
+                margin: 0;
+                display: block;
+            }
+
+            .project-images-pagination {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
 
             .project-item.two-images .project-info {
@@ -1755,7 +1783,7 @@
 
         .project-info {
             background: #f5f5f5;
-            padding: 3rem;
+            /* padding: 3rem; */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -2166,6 +2194,9 @@
                         <div class="project-carousel-desktop-slide">
                             <img src="images/Oficina-KM-21-2.png" alt="Oficina KM 21">
                         </div>
+                        <div class="project-carousel-desktop-slide">
+                            <img src="images/Oficina-KM-21-3.png" alt="Oficina KM 21">
+                        </div>
                     </div>
                 </div>
                 <button class="project-carousel-nav prev" data-project="oficina"></button>
@@ -2182,10 +2213,14 @@
                         <div class="project-images-carousel-slide">
                             <img src="images/Oficina-KM-21-2.png" alt="Oficina KM 21">
                         </div>
+                        <div class="project-images-carousel-slide">
+                            <img src="images/Oficina-KM-21-3.png" alt="Oficina KM 21">
+                        </div>
                     </div>
                 </div>
                 <div class="project-images-pagination">
                     <span class="project-pagination-dot active"></span>
+                    <span class="project-pagination-dot"></span>
                     <span class="project-pagination-dot"></span>
                 </div>
             </div>
@@ -2317,7 +2352,7 @@
                 currentSlide = index;
                 updateCarousel();
                 stopCarousel();
-                startCarousel();
+                // Don't auto-restart after manual interaction
             }
         }
 
@@ -2432,10 +2467,16 @@
                 }
             });
 
+            // Pause on hover
+            servicesCarouselWrapper.addEventListener('mouseenter', stopCarousel);
             servicesCarouselWrapper.addEventListener('mouseleave', function() {
                 if (isDragging) {
                     isDragging = false;
                     updateCarousel();
+                }
+                // Resume auto-play when mouse leaves (only on mobile)
+                if (window.innerWidth <= 768 && !isDragging) {
+                    startCarousel();
                 }
             });
         }
@@ -2577,7 +2618,7 @@
                         currentSlide = index;
                         updateProjectCarousel();
                         stopProjectCarousel();
-                        startProjectCarousel();
+                        // Don't auto-restart after manual interaction
                     }
                 }
 
