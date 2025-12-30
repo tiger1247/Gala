@@ -2497,10 +2497,10 @@
                     isDragging = false;
                     updateCarousel();
                 }
-                // Resume auto-play when mouse leaves (only on mobile)
-                if (window.innerWidth <= 768 && !isDragging) {
-                    startCarousel();
-                }
+                // Auto-play disabled - manual sliding only
+                // if (window.innerWidth <= 768 && !isDragging) {
+                //     startCarousel();
+                // }
             });
         }
 
@@ -2523,18 +2523,20 @@
             }
         }
 
+        // Auto-play disabled - manual sliding only
         // Start carousel on mobile
-        if (window.innerWidth <= 768) {
-            startCarousel();
-        }
+        // if (window.innerWidth <= 768) {
+        //     startCarousel();
+        // }
 
         // Handle window resize
         window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                startCarousel();
-            } else {
-                stopCarousel();
-            }
+            // Auto-play disabled - manual sliding only
+            // if (window.innerWidth <= 768) {
+            //     startCarousel();
+            // } else {
+            //     stopCarousel();
+            // }
         });
 
         // Desktop Carousel Navigation
@@ -2778,26 +2780,29 @@
                     }
                 }
 
+                // Auto-play disabled - manual sliding only
                 // Initialize
-                if (window.innerWidth <= 768) {
-                    startProjectCarousel();
-                }
+                // if (window.innerWidth <= 768) {
+                //     startProjectCarousel();
+                // }
 
                 // Handle window resize
                 window.addEventListener('resize', function() {
-                    if (window.innerWidth <= 768) {
-                        startProjectCarousel();
-                    } else {
-                        stopProjectCarousel();
-                    }
+                    // Auto-play disabled - manual sliding only
+                    // if (window.innerWidth <= 768) {
+                    //     startProjectCarousel();
+                    // } else {
+                    //     stopProjectCarousel();
+                    // }
                 });
 
                 // Pause on hover
                 carousel.addEventListener('mouseenter', stopProjectCarousel);
                 carousel.addEventListener('mouseleave', function() {
-                    if (window.innerWidth <= 768) {
-                        startProjectCarousel();
-                    }
+                    // Auto-play disabled - manual sliding only
+                    // if (window.innerWidth <= 768) {
+                    //     startProjectCarousel();
+                    // }
                 });
             });
         }
